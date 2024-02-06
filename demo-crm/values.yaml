@@ -1,0 +1,54 @@
+app:
+  name: poster-downloader
+  namespace: default
+  replicaCount: 3
+  image:
+    repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
+    tag: 1.0.0
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+service:
+  name: poster-downloader-service
+  port: 80
+
+ingress:
+  name: poster-downloader-ingress
+  ingressClassName: nginx
+  hostName: "develeap-testcrm.ddns.net"
+  enabled: true  # Set to false if you don't want to use Ingress
+  tls:
+    enabled: false
+    secretName: poster-downloader-tls
+    hosts:
+      - "develeap-testcrm.ddns.net"
+
+configmap:
+  name: poster-downloader-configmap
+  data:
+    LOG_LEVEL: debug
+    # PERSISTENCE: true
+
+secret:
+  name: poster-downloader-secret
+  # data:
+    # MONGODB_URI: "mongodb://myUser:myPassword@mongodb-0.mongodb-headless.default.svc.cluster.local:27017,mongodb-1.mongodb-headless.default.svc.cluster.local:27017,mongodb-2.mongodb-headless.default.svc.cluster.local:27017"
+    
+mongodb:
+  architecture: replicaset
+  replicaCount: 3
+  systemLogVerbosity: 3
+  persistence:
+    enabled: true
+  auth:  
+    enabled: true
+    rootUser: myUser
+    rootPassword: myPassword
+    username: myUser
+    password: myPassword
+    database: "mydatabase"
