@@ -4,5 +4,4 @@ metadata:
   name: {{ .Values.configmap.name }}
   namespace: {{ .Values.app.namespace }}
 data:
-  LOG_LEVEL: {{ .Values.configmap.data.LOG_LEVEL }}
-  PERSISTENCE: {{ .Values.configmap.data.PERSISTENCE | quote }}
+  LOG_LEVEL: {{ .Values.configmap.data.LOG_LEVEL | quote }}

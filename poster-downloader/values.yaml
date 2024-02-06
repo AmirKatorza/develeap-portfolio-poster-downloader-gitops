@@ -31,13 +31,10 @@ ingress:
 configmap:
   name: poster-downloader-configmap
   data:
-    LOG_LEVEL: debug
-    # PERSISTENCE: true
+    LOG_LEVEL: "INFO"    
 
 secret:
-  name: poster-downloader-secret
-  # data:
-    # MONGODB_URI: "mongodb://myUser:myPassword@mongodb-0.mongodb-headless.default.svc.cluster.local:27017,mongodb-1.mongodb-headless.default.svc.cluster.local:27017,mongodb-2.mongodb-headless.default.svc.cluster.local:27017"
+  name: poster-downloader-secret  
     
 mongodb:
   architecture: replicaset
@@ -51,4 +48,4 @@ mongodb:
     rootPassword: myPassword
     username: myUser
     password: myPassword
-    database: "mydatabase"
+    database: "movies"
