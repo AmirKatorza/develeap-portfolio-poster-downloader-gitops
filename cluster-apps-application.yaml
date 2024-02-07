@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default  
+  source:
+    repoURL: git@github.com:AmirKatorza/develeap-portfolio-poster-downloader-gitops.git
+    targetRevision: HEAD
+    path: cluster-apps
+
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: argocd  # Suggested dedicated namespace
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  # Ensure ArgoCD creates the namespace if it doesn't exist
+    automated:
+      selfHeal: true
+      prune: true
