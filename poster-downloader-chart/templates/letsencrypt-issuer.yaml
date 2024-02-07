@@ -1,12 +1,17 @@
 {{- if and .Values.ingress.enabled .Values.ingress.tls.enabled }}
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
-  name: letsencrypt
+  name: letsencrypt-poster-downloader
 spec:
   acme:
-    # The ACME server URL
+{{ if .Values.ingress.tls.staging }}
+    # The ACME server URL (staging)
     server: https://acme-staging-v02.api.letsencrypt.org/directory
+{{ else }}
+    # The ACME server URL (production)
+    server: https://acme-v02.api.letsencrypt.org/directory
+{{ end }}
     # Email address used for ACME registration
     email: amir.katorza@gmail.com
     # Name of a secret used to store the ACME account private key
@@ -16,5 +21,5 @@ spec:
     solvers:
       - http01:
           ingress:
-            ingressClassName: {{ .Values.ingress.ingressClassName }}
+            class: {{ .Values.ingress.ingressClassName }}
 {{- end }}

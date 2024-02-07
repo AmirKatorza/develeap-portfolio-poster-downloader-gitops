@@ -1,6 +1,6 @@
 app:
   name: poster-downloader
-  namespace: myapp
+  namespace: poster-downloader
   replicaCount: 3
   image:
     repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
@@ -20,13 +20,14 @@ service:
 ingress:
   name: poster-downloader-ingress
   ingressClassName: nginx
-  hostName: "develeap-testcrm.ddns.net"
+  hostName: "poster-downloader.ddns.net"
   enabled: true  # Set to false if you don't want to use Ingress
   tls:
-    enabled: false
+    enabled: true  # Enable TLS for HTTPS
+    staging: false  # Use Let's Encrypt production environment
     secretName: poster-downloader-tls
     hosts:
-      - "develeap-testcrm.ddns.net"
+      - "poster-downloader.ddns.net"
 
 configmap:
   name: poster-downloader-configmap
