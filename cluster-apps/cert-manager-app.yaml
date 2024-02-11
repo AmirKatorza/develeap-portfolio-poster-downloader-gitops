@@ -9,17 +9,12 @@ spec:
   project: default
   source:
     repoURL: https://charts.jetstack.io
-    targetRevision: "1.13.3"
+    targetRevision: "1.14.2"
     chart: cert-manager
     helm:
       parameters:
         - name: installCRDs
-          value: "true"
-      # If you have additional custom values, specify the path to the values file relative to the root of the repository.
-      # Assuming 'cert-manager-values.yml' exists at the root or a specific path in your Git repository, 
-      # use `valuesFiles` to reference it. Here's how you might include it if it was in a directory named 'values' within your repo:
-      # valueFiles:
-      #   - values/cert-manager-values.yml
+          value: "true"      
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
