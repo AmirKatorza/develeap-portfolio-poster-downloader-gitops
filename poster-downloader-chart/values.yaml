@@ -21,14 +21,12 @@ service:
 ingress:
   name: poster-downloader-ingress
   ingressClassName: nginx
-  hostName: "poster-downloader.ddns.net"
+  hostName: poster-downloader.ddns.net
   enabled: true # Set to false if you don't want to use Ingress
   tls:
     enabled: true # Enable TLS for HTTPS
     staging: true # Use Let's Encrypt production environment
-    secretName: poster-downloader-tls
-    hosts:
-      - "poster-downloader.ddns.net"
+    secretName: poster-downloader-tls    
 
 configmap:
   name: poster-downloader-configmap
