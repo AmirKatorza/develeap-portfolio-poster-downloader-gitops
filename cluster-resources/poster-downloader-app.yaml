@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: poster-downloader-app
+  name: poster-downloader
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: git@github.com:AmirKatorza/develeap-portfolio-poster-downloader-gitops.git
     targetRevision: HEAD
-    path: poster-downloader-chart
+    path: cluster-resources/poster-downloader-chart
 
   destination: 
     server: https://kubernetes.default.svc

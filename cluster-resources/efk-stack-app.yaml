@@ -1,20 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-config
+  name: efk-stack
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: git@github.com:AmirKatorza/develeap-portfolio-poster-downloader-gitops.git
     targetRevision: HEAD  # Adjust if you want to pin to a specific branch, tag, or commit
-    path: cluster-resources/cert-manager  # The path within your repo where the ClusterIssuer and Certificate YAML files are located
+    path: cluster-resources/efk-stack-chart  # The path within your repo where the ClusterIssuer and Certificate YAML files are located
+  
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager  # Ensure the namespace is correct for where you want to deploy these resources
+    namespace: efk  # Ensure the namespace is correct for where you want to deploy these resources
+  
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  # This will create the namespace if it doesn't exist
     automated:
       selfHeal: true
       prune: true
-    syncOptions:
-      - CreateNamespace=true  # This will create the namespace if it doesn't exist
