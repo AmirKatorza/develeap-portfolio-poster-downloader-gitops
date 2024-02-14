@@ -1,6 +1,6 @@
 app:
   name: poster-downloader
-  namespace: default
+  # namespace: poster-downloader
   replicaCount: 3
   image:
     repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
