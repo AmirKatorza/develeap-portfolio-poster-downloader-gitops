@@ -6,19 +6,19 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default  
-  source:
+  project: default # for grouping argocd applications into projects
+  source: # where to find k8s manifests
     repoURL: git@github.com:AmirKatorza/develeap-portfolio-poster-downloader-gitops.git
     targetRevision: HEAD
-    path: cluster-resources/poster-downloader-chart
-
-  destination: 
-    server: https://kubernetes.default.svc
-    namespace: poster-downloader  # Suggested dedicated namespace
-
+    path: cluster-resources/poster-downloader-chart # path within repo directory    
+  
+  destination: # where to deploy
+    server: https://kubernetes.default.svc # internal k8s service in default namespace
+    namespace: poster-downloader # custom namespace
+  
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true  # Ensure ArgoCD creates the namespace if it doesn't exist
-    automated:
-      selfHeal: true
-      prune: true
+      - CreateNamespace=true # automatically creates our custom namespace
+    automated: # most automation features are tunred off by default as a safety mechanism
+      selfHeal: true # when manual changes are applied to the cluster --> automatically sync with source state
+      prune: true # deletion synchronization is disabled by default, this enables it
