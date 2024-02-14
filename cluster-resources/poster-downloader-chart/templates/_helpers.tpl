@@ -1,17 +1,15 @@
-{{- define "posterdomloader.mongodb.fullname" -}}
+{{- define "posterdownloader.mongodb.fullname" -}}
 {{- include "mongodb.fullname" .Subcharts.mongodb -}}
 {{- end -}}
 
-{{- define "posterdomloader.mongodb.service.nameOverride" -}}
+{{- define "posterdownloader.mongodb.service.nameOverride" -}}
 {{- include "mongodb.service.nameOverride" .Subcharts.mongodb -}}
 {{- end -}}
 
-# mongodb-uri.yaml
-
-{{- define "posterdomloader.mongodb.uri" -}}
+{{- define "posterdownloader.mongodb.uri" -}}
 {{- $replicaCount := int .Values.mongodb.replicaCount }}
-{{- $fullName := include "posterdomloader.mongodb.fullname" . }}
-{{- $serviceName := include "posterdomloader.mongodb.service.nameOverride" . }}
+{{- $fullName := include "posterdownloader.mongodb.fullname" . }}
+{{- $serviceName := include "posterdownloader.mongodb.service.nameOverride" . }}
 {{- $uri := printf "mongodb://%s:%s@" .Values.mongodb.auth.rootUser .Values.mongodb.auth.rootPassword -}}
 {{- range $i := until $replicaCount }}
   {{- if ne $i 0 }}{{- $uri = printf "%s," $uri -}}{{- end }}

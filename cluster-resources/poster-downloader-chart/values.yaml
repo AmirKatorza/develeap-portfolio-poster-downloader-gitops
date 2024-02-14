@@ -45,8 +45,10 @@ mongodb:
     enabled: true
   auth:
     enabled: true
-    rootUser: myUser
-    rootPassword: myPassword
-    username: myUser
-    password: myPassword
+    # existingSecret: mongodb-credentials      
+    # rootUser: myUser
+    # rootPassword: rootPassword
+    # username: myUser
+    # password: myPassword
+    
     database: "movies"
