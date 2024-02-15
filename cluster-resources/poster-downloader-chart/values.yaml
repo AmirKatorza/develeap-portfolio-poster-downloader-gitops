@@ -4,7 +4,7 @@ app:
   replicaCount: 3
   image:
     repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
-    tag: "2.0.2"
+    tag: "2.0.3"
   port: 5000
   resources:
     requests:
@@ -40,7 +40,7 @@ mongodb:
     enabled: true
   auth:
     enabled: true
-    existingSecret: mongodb-credentials      
+    existingSecret: mongodb-credentials
     rootUser: root
     username: user
     database: "movies"
