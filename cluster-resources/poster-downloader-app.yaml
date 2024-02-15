@@ -10,7 +10,7 @@ spec:
   source: # where to find k8s manifests
     repoURL: git@github.com:AmirKatorza/develeap-portfolio-poster-downloader-gitops.git
     targetRevision: HEAD
-    path: cluster-resources/poster-downloader-chart # path within repo directory    
+    path: poster-downloader-chart # path within repo directory    
   
   destination: # where to deploy
     server: https://kubernetes.default.svc # internal k8s service in default namespace
