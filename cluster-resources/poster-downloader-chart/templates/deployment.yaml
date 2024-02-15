@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}-dpl
-  # namespace: {{ .Values.app.namespace }}
+  name: {{ .Values.app.name }}-dpl  
   labels:
     app: {{ .Values.app.name }}
 spec:
@@ -25,6 +24,12 @@ spec:
                 name: {{ .Values.configmap.name }}
             - secretRef:
                 name: {{ .Values.secret.name }}
+          env:
+            - name: ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-credentials
+                  key: mongodb-root-password
           resources:
             requests:
               cpu: {{ .Values.app.resources.requests.cpu }}
