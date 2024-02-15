@@ -15,5 +15,5 @@
   {{- $host := printf "%s-%d.%s:27017" $fullName $i $serviceName -}}
   {{- $hostList = append $hostList $host -}}
 {{- end }}
-{{- $hostList:= join "," $hostList }}
+{{- join "," $hostList }}
 {{- end -}}
