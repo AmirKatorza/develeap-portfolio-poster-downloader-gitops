@@ -24,8 +24,8 @@ ingress:
   hostName: "poster-downloader.ddns.net"
   tls:
     enabled: true # Enable TLS for HTTPS
-    staging: false # Use Let's Encrypt production environment
-    secretName: wildcard-domain-tls # poster-downloader-tls    
+    # staging: false # Use Let's Encrypt production environment
+    secretName: source-tls     
 configmap:
   name: poster-downloader-configmap
   data:
