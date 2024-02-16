@@ -6,21 +6,19 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
-  source:
-    repoURL: https://charts.jetstack.io
-    targetRevision: "1.14.2"
-    chart: cert-manager
-    helm:
-      parameters:
-        - name: installCRDs
-          value: "true"      
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: cert-manager
+  project: default # for grouping argocd applications into projects
+  source: # where to find k8s manifests
+    repoURL: git@github.com:AmirKatorza/develeap-portfolio-poster-downloader-gitops.git
+    targetRevision: HEAD
+    path: my-charts/cert-manager # path within repo directory    
+  
+  destination: # where to deploy
+    server: https://kubernetes.default.svc # internal k8s service in default namespace
+    namespace: cert-manager # custom namespace
+  
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true
-    automated:
-      selfHeal: true
-      prune: true
+      - CreateNamespace=true # automatically creates our custom namespace
+    automated: # most automation features are tunred off by default as a safety mechanism
+      selfHeal: true # when manual changes are applied to the cluster --> automatically sync with source state
+      prune: true # deletion synchronization is disabled by default, this enables it
