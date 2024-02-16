@@ -29,8 +29,3 @@ dependencies:
     repository: https://charts.jetstack.io
     alias: cert-manager
     condition: cert-manager.enabled
-
-
-
-    
-    
