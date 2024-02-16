@@ -6,7 +6,9 @@ metadata:
   namespace: cert-manager
 spec:
   secretName: source-tls
-  commonName: source
+  commonName: poster-downloader.ddns.net 
+  dnsNames:
+    - poster-downloader.ddns.net 
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
