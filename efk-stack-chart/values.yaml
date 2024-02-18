@@ -6,6 +6,7 @@ elasticsearch:
       # Add default labels for the volumeClaimTemplate of the StatefulSet
       enabled: true
   
+# Kibana values
 kibana:
   ingress:
     enabled: true
