@@ -19,8 +19,8 @@ kibana:
       - host: poster-downloader.ddns.net
         paths:
           - path: /kibana
-    tls: 
-      hosts:
+    tls:
+    - hosts:
         - poster-downloader.ddns.net    
 
 # Fluent-bit values
