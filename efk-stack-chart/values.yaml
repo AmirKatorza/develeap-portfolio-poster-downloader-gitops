@@ -1,5 +1,7 @@
 # Elasticsearch values
 elasticsearch:
+  replicas: 2
+  minimumMasterNodes: 1
   persistence:
     enabled: true
     labels:
