@@ -24,24 +24,24 @@ version: 0.1.0
 appVersion: "1.16.0"
 
 dependencies:
-  # Elasticsearch
-  - name: elasticsearch
-    version: 19.18.0
-    repository: https://charts.bitnami.com/bitnami
+  # # Elasticsearch
+  # - name: elasticsearch
+  #   version: 19.18.0
+  #   repository: https://charts.bitnami.com/bitnami
   
   # Fluent Bit
   - name: fluent-bit
     version: 0.43.0
     repository: https://fluent.github.io/helm-charts
 
-  # # Elasticsearch
-  # - name: elasticsearch
-  #   version: 8.5.1
-  #   repository: https://helm.elastic.co
+  # Elasticsearch
+  - name: elasticsearch
+    version: 7.17.3
+    repository: https://helm.elastic.co
 
-  # # Kibana
-  # - name: kibana
-  #   version: 8.5.1
-  #   repository: https://helm.elastic.co
+  # Kibana
+  - name: kibana
+    version: 7.17.3
+    repository: https://helm.elastic.co
   
   

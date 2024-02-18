@@ -1,50 +1,26 @@
 # Elasticsearch values
 elasticsearch:
-  global:
-    elasticsearch:
-      service:
-        name: elasticsearch
-        ports:
-          restAPI: 9200
-    kibanaEnabled: true
-  
-  master:
-    masterOnly: false
-    replicaCount: 1
-  data:
-    replicaCount: 0
-  coordinating:
-    replicaCount: 0
-  ingest:
-    replicaCount: 0
-
-  sysctlImage:
-    ## Enable kernel settings modifier image - not available in GKE Autopilot
-    ## See https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-virtual-memory.html
+  persistence:
     enabled: true
-
-  # Kibana values (subchart)
-  # kibana:
-  #   ingress:
-  #     enabled: true
-  #     hostname: poster-downloader.ddns.net
-  #     path: /kibana
-  #     # annotations:
-  #     #   cert-manager.io/cluster-issuer: "letsencrypt"
-  #     tls: true
-  #     ingressClassName: "nginx"
-  #   persistence:
-  #     enabled: true
-  #     size: 5Gi
-  #   service:
-  #     port:
-  #       http: 5601
-  kibana:
-    elasticsearch:
+    labels:
+      # Add default labels for the volumeClaimTemplate of the StatefulSet
+      enabled: true
+  
+kibana:
+  ingress:
+    enabled: true
+    className: "nginx"
+    pathtype: ImplementationSpecific
+    annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: poster-downloader.ddns.net
+        paths:
+          - path: /kibana
+    tls: 
       hosts:
-        - '{{ include "elasticsearch.service.name" . }}'
-      port: '{{ include "elasticsearch.service.ports.restAPI" . }}'
-
+        - poster-downloader.ddns.net    
 
 # Fluent-bit values
 fluent-bit:
