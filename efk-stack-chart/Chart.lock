@@ -1,9 +1,9 @@
 dependencies:
 - name: elasticsearch
   repository: https://charts.bitnami.com/bitnami
-  version: 19.16.3
+  version: 19.18.0
 - name: fluent-bit
   repository: https://fluent.github.io/helm-charts
-  version: 0.39.0
-digest: sha256:84562e5f79ff8072f3830ea034eda8d9303a43556c217b5b7b69efb95d1755ba
-generated: "2024-02-18T12:08:37.8621203+02:00"
+  version: 0.43.0
+digest: sha256:8b32154b941497384bbed54a5e587c3c41c0fa082aa4b74b609f9a10224bdd7b
+generated: "2024-02-18T17:08:29.251774299+02:00"
