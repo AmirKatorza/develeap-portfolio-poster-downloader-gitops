@@ -7,7 +7,7 @@ elasticsearch:
         ports:
           restAPI: 9200
     kibanaEnabled: true
-
+  
   master:
     masterOnly: false
     replicaCount: 1
@@ -24,21 +24,27 @@ elasticsearch:
     enabled: true
 
   # Kibana values (subchart)
+  # kibana:
+  #   ingress:
+  #     enabled: true
+  #     hostname: poster-downloader.ddns.net
+  #     path: /kibana
+  #     # annotations:
+  #     #   cert-manager.io/cluster-issuer: "letsencrypt"
+  #     tls: true
+  #     ingressClassName: "nginx"
+  #   persistence:
+  #     enabled: true
+  #     size: 5Gi
+  #   service:
+  #     port:
+  #       http: 5601
   kibana:
-    ingress:
-      enabled: true
-      hostname: poster-downloader.ddns.net
-      path: /kibana
-      # annotations:
-      #   cert-manager.io/cluster-issuer: "letsencrypt"
-      tls: true
-      ingressClassName: "nginx"
-    persistence:
-      enabled: true
-      size: 5Gi
-    service:
-      port:
-        http: 5601
+    elasticsearch:
+      hosts:
+        - '{{ include "elasticsearch.service.name" . }}'
+      port: '{{ include "elasticsearch.service.ports.restAPI" . }}'
+
 
 # Fluent-bit values
 fluent-bit:
@@ -80,10 +86,10 @@ fluent-bit:
     inputs: |
       [INPUT]
           Name tail
-          Path /var/log/containers/*.log
+          Path /var/log/containers/*poster*.log
           multiline.parser docker, cri
           Tag kube.*
-          Mem_Buf_Limit 5MB
+          Mem_Buf_Limit 100MB
           Skip_Long_Lines On
 
       [INPUT]
@@ -116,10 +122,8 @@ fluent-bit:
           Type  _doc
           Host efk-stack-elasticsearch
           Port 9200
-          tls Off
-          tls.verify Off
           Logstash_Format On
-          Logstash_Prefix logstash
+          Logstash_Prefix poster
           Retry_Limit False
           Suppress_Type_Name On
 
@@ -128,10 +132,24 @@ fluent-bit:
           Match host.*
           Type  _doc
           Host efk-stack-elasticsearch
-          Port 9200         
-          tls Off
-          tls.verify Off
+          Port 9200                   
           Logstash_Format On
           Logstash_Prefix node
           Retry_Limit False
           Suppress_Type_Name On
+    
+    customParsers: |
+      [PARSER]
+          Name json_parser
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%NZ
+      
+      [PARSER]
+          Name flask_parser
+          Format regex
+          Regex ^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),\d{3} - (?<level>\w+) - (?<message>.*)$
+          Time_Key time
+          Time_Format %Y-%m-%d %H:%M:%S
+          Time_Keep On
