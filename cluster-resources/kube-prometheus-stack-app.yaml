@@ -15,7 +15,7 @@ spec:
         valueFiles:
           - $values/cluster-resources/kube-prometheus-stack-values.yaml
     - repoURL: 'https://github.com/AmirKatorza/develeap-portfolio-poster-downloader-gitops.git'
-      targetRevision: main
+      targetRevision: efk
       ref: values
   destination:
     server: https://kubernetes.default.svc
