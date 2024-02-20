@@ -98,22 +98,18 @@ fluent-bit:
       [OUTPUT]
           Name es
           Match kube.*
-          Type  _doc
+          Type _doc
           Host elasticsearch-master
-          Port 9200
-          Logstash_Format On
-          Logstash_Prefix poster
+          Port 9200          
           Retry_Limit False
           Suppress_Type_Name On
 
       [OUTPUT]
           Name es
           Match host.*
-          Type  _doc
+          Type _doc
           Host elasticsearch-master
-          Port 9200                   
-          Logstash_Format On
-          Logstash_Prefix node
+          Port 9200          
           Retry_Limit False
           Suppress_Type_Name On
     
