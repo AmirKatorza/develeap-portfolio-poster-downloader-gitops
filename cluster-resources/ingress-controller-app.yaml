@@ -7,15 +7,16 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.9.0
-    chart: ingress-nginx
-    helm:
-      parameters:
-        - name: controller.ingressClassResource.default
-          value: "true"
-      # Include other Helm values here as needed
+  sources:
+    - repoURL: https://kubernetes.github.io/ingress-nginx
+      targetRevision: 4.9.0
+      chart: ingress-nginx
+      helm:      
+        valueFiles:
+          - $values/values/ingress-controller-values.yaml
+    - repoURL: 'https://github.com/AmirKatorza/develeap-portfolio-poster-downloader-gitops.git'
+      targetRevision: HEAD
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress
