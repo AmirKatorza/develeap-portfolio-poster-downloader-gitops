@@ -1,4 +1,3 @@
-{{- if and .Values.ingress.enabled .Values.ingress.tls.enabled }}
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -19,4 +18,3 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "default,argocd,poster-downloader,efk"  # Control destination namespaces
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "default,argocd,poster-downloader,efk" # Control auto-reflection namespaces
-{{- end }}
