@@ -100,7 +100,9 @@ fluent-bit:
           Match kube.*
           Type _doc
           Host elasticsearch-master
-          Port 9200          
+          Port 9200
+          Logstash_Format On
+          Logstash_Prefix poster
           Retry_Limit False
           Suppress_Type_Name On
 
@@ -109,7 +111,9 @@ fluent-bit:
           Match host.*
           Type _doc
           Host elasticsearch-master
-          Port 9200          
+          Port 9200                   
+          Logstash_Format On
+          Logstash_Prefix node
           Retry_Limit False
           Suppress_Type_Name On
     
