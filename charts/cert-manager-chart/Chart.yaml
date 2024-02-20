@@ -27,3 +27,6 @@ dependencies:
   - name: cert-manager
     version: "v1.14.2"
     repository: https://charts.jetstack.io
+  - name: reflector
+    version: 7.1.238
+    repository: https://emberstack.github.io/helm-charts
