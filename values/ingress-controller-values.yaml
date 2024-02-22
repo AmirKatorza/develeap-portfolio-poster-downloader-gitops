@@ -1,9 +1,10 @@
 controller:
   metrics:
     enabled: true
-  podAnnotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "10254"
+    serviceMonitor:
+      additionalLabels:
+        release: prometheus
+      enabled: true
   extraArgs:
     enable-ssl-passthrough: "true"
   ingressClassResource:
