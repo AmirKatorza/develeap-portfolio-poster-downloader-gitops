@@ -3,7 +3,7 @@ controller:
     enabled: true
     serviceMonitor:
       additionalLabels:
-        release: prometheus
+        release: "kube-prometheus-stack"
       enabled: true
   extraArgs:
     enable-ssl-passthrough: "true"
