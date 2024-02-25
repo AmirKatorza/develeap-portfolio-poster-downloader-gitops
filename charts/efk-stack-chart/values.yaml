@@ -22,8 +22,9 @@ kibana:
         paths:
           - path: /kibana
     tls:
-    - hosts:
-        - poster-downloader.ddns.net    
+      - secretName: source-tls
+        hosts:
+          - poster-downloader.ddns.net  
 
 # Fluent-bit values
 fluent-bit:

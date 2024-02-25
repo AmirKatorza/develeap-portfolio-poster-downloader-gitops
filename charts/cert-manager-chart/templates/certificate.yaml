@@ -4,14 +4,17 @@ metadata:
   name: source-tls
   namespace: cert-manager
 spec:
+  # Secret name to create, where the private key and certificate should be stored.
   secretName: source-tls
-  commonName: poster-downloader.ddns.net 
-  dnsNames:
-    - poster-downloader.ddns.net 
+  # What Issuer to use for getting the certificate.
   issuerRef:
-    name: letsencrypt
-    kind: ClusterIssuer
+    name: letsencrypt-nginx
+    kind: Issuer
     group: cert-manager.io
+  # Common name to be used on the Certificate.
+  commonName: "poster-downloader.ddns.net"
+  dnsNames:
+    - "poster-downloader.ddns.net"  
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"

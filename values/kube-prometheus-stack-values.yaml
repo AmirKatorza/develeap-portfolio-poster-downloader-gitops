@@ -42,7 +42,8 @@ grafana:
     ##
     tls: 
       - hosts:
-        - poster-downloader.ddns.net        
+        - poster-downloader.ddns.net
+        secretName: source-tls        
 
   # # To make Grafana persistent (Using Statefulset)
   # #

@@ -1,6 +1,5 @@
 ClusterIssuer:
-  staging: true
-  ingressClass: nginx
+  staging: true  
 
 cert-manager:
   installCRDs: true

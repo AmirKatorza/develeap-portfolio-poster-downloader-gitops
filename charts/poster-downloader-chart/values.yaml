@@ -13,25 +13,24 @@ app:
     limits:
       cpu: 500m
       memory: 512Mi
+
 service:
-  name: poster-downloader-service
   port: 80
+
 ingress:
-  enabled: true # Set to false if you don't want to use Ingress
-  name: poster-downloader-ingress
+  enabled: true # Set to false if you don't want to use Ingress  
   ingressControllerNamespace: ingress
   ingressClassName: nginx
   hostName: "poster-downloader.ddns.net"
   tls:
     enabled: true # Enable TLS for HTTPS
-    staging: true # Use Let's Encrypt production environment
-    secretName: source-tls # poster-downloader-tls    
+    # staging: true # Use Let's Encrypt production environment
+    secretName: source-tls     
+
 configmap:
-  name: poster-downloader-configmap
   data:
     LOG_LEVEL: "INFO"
-secret:
-  name: poster-downloader-secret
+
 mongodb:
   architecture: replicaset
   replicaCount: 3
