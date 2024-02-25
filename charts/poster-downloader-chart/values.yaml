@@ -1,7 +1,7 @@
 app:
   name: poster-downloader
   namespace: poster-downloader
-  replicaCount: 3
+  replicaCount: 1
   image:
     repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
     tag: "2.1.5"
