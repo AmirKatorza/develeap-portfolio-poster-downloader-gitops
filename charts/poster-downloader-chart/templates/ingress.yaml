@@ -4,10 +4,10 @@ kind: Ingress
 metadata:
   name: {{ .Values.app.name }}-ingress
   namespace: {{ .Values.app.namespace }}
-{{- if .Values.ingress.tls.enabled }}
-  annotations:
-    cert-manager.io/issuer: "letsencrypt-nginx"
-{{- end }}
+# {{- if .Values.ingress.tls.enabled }}
+#   annotations: 
+#     cert-manager.io/issuer: "letsencrypt-nginx"
+# {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }}  # This is the name of the ingress controller
 {{- if .Values.ingress.tls.enabled }}
