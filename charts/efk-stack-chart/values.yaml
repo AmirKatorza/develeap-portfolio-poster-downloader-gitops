@@ -40,6 +40,7 @@ fluent-bit:
           HTTP_Listen 0.0.0.0
           HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
+    
     inputs: |
       [INPUT]
           Name tail
@@ -48,11 +49,13 @@ fluent-bit:
           Tag kube.*
           Mem_Buf_Limit 100MB
           Skip_Long_Lines On
+      
       [INPUT]
           Name systemd
           Tag host.*
           Systemd_Filter _SYSTEMD_UNIT=kubelet.service
           Read_From_Tail On
+    
     filters: |
       [FILTER]
           Name kubernetes
@@ -61,6 +64,7 @@ fluent-bit:
           Keep_Log Off
           K8S-Logging.Parser On
           K8S-Logging.Exclude On
+    
     outputs: |
       [OUTPUT]
           Name es
