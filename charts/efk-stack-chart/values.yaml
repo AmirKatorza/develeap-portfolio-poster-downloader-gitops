@@ -81,16 +81,16 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
       [OUTPUT]
-        Name es
-        Match poster-downloader.*
-        Host elasticsearch-master
-        Logstash_Format On
-        Logstash_Prefix poster-downloader-logs
-        Retry_Limit False
+          Name es
+          Match poster-downloader.*
+          Host elasticsearch-master
+          Logstash_Format On
+          Logstash_Prefix poster-downloader-logs
+          Retry_Limit False
 
       [OUTPUT]
-        Name stdout
-        Match *
+          Name stdout
+          Match *
 
     customParsers: |
       [PARSER]
