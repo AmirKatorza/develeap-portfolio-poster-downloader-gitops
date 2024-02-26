@@ -43,7 +43,7 @@ fluent-bit:
     inputs: |
       [INPUT]
           Name tail
-          Path /var/log/containers/*food*.log
+          Path /var/log/containers/*poster*.log
           multiline.parser docker, cri
           Tag kube.*
           Mem_Buf_Limit 100MB
@@ -66,7 +66,7 @@ fluent-bit:
           Name es
           Match kube.*
           Type  _doc
-          Host efk-stack-elasticsearch
+          Host elasticsearch-master
           Port 9200
           tls Off
           tls.verify Off
@@ -79,7 +79,7 @@ fluent-bit:
           Name es
           Match host.*
           Type  _doc
-          Host efk-stack-elasticsearch
+          Host elasticsearch-master
           Port 9200
           tls Off
           tls.verify Off
