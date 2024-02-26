@@ -40,68 +40,50 @@ fluent-bit:
           HTTP_Listen 0.0.0.0
           HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
-
-    ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
       [INPUT]
           Name tail
-          Path /var/log/containers/poster-downloader*.log
-          Tag poster-downloader.*
-          Parser regex_parser
+          Path /var/log/containers/*food*.log
+          multiline.parser docker, cri
+          Tag kube.*
           Mem_Buf_Limit 100MB
           Skip_Long_Lines On
-          Refresh_Interval 10      
-
-    ## https://docs.fluentbit.io/manual/pipeline/filters
+      [INPUT]
+          Name systemd
+          Tag host.*
+          Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+          Read_From_Tail On
     filters: |
       [FILTER]
-          Name parser
-          Match poster-downloader.*
-          Key_Name log
-          Parser json_parser
-          Reserve_Data On          
-
-      [FILTER]
-          Name parser
-          Match poster-downloader.*
-          Key_Name log
-          Parser regex_parser
-          Reserve_Data On          
-
-      [FILTER]
           Name kubernetes
-          Match poster-downloader.*
+          Match kube.*
           Merge_Log On
           Keep_Log Off
           K8S-Logging.Parser On
           K8S-Logging.Exclude On
-
-    ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
       [OUTPUT]
           Name es
-          Match poster-downloader.*
-          Host elasticsearch-master
+          Match kube.*
+          Type  _doc
+          Host efk-stack-elasticsearch
+          Port 9200
+          tls Off
+          tls.verify Off
           Logstash_Format On
-          Logstash_Prefix poster-downloader-logs
+          Logstash_Prefix foodist
           Retry_Limit False
+          Suppress_Type_Name On
 
       [OUTPUT]
-          Name stdout
-          Match *
-
-    customParsers: |
-      [PARSER]
-          Name json_parser
-          Time_Keep On
-          Format json
-          Time_Key time
-          Time_Format %Y-%m-%dT%H:%M:%S.%L
-      
-      [PARSER]
-          Name regex_parser
-          Format regex
-          Regex ^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),\d{3} - (?<level>\w+) - (?<message>.*)$
-          Time_Key time
-          Time_Format %Y-%m-%d %H:%M:%S
-          Time_Keep On
+          Name es
+          Match host.*
+          Type  _doc
+          Host efk-stack-elasticsearch
+          Port 9200
+          tls Off
+          tls.verify Off
+          Logstash_Format On
+          Logstash_Prefix node
+          Retry_Limit False
+          Suppress_Type_Name On
