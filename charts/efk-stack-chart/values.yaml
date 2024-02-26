@@ -71,7 +71,7 @@ fluent-bit:
           tls Off
           tls.verify Off
           Logstash_Format On
-          Logstash_Prefix foodist
+          Logstash_Prefix poster-downloader
           Retry_Limit False
           Suppress_Type_Name On
 
