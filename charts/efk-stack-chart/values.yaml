@@ -59,16 +59,14 @@ fluent-bit:
           Match poster-downloader.*
           Key_Name log
           Parser json_parser
-          Reserve_Data On
-          Reserve_Time On
+          Reserve_Data On          
 
       [FILTER]
           Name parser
           Match poster-downloader.*
           Key_Name log
           Parser regex_parser
-          Reserve_Data On
-          Reserve_Time On
+          Reserve_Data On          
 
       [FILTER]
           Name kubernetes
