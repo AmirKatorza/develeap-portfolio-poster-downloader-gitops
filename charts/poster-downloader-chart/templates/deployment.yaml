@@ -22,9 +22,9 @@ spec:
             - containerPort: {{ .Values.app.port | default "5000" }}
           envFrom:
             - configMapRef:
-                name: {{ .Values.configmap.name }}
+                name: {{ .Values.app.name }}-configmap
             - secretRef:
-                name: {{ .Values.secret.name }}
+                name: {{ .Values.app.name }}-secret
           env:
             - name: ROOT_PASSWORD
               valueFrom:
