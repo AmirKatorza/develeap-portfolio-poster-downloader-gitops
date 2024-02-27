@@ -14,28 +14,13 @@ prometheus:
 grafana:
   enabled: true
   adminPassword: amirkato
-  ingress:
-    ## If true, Grafana Ingress will be created
-    ##
-    enabled: true
-
-    ## IngressClassName for Grafana Ingress.
-    ## Should be provided if Ingress is enable.
-    ##
-    ingressClassName: nginx         
-
-    ## Hostnames.
-    ## Must be provided if Ingress is enable.
-    ##
+  ingress:    
+    enabled: true    
+    ingressClassName: nginx    
     hosts:
-      - poster-downloader.ddns.net    
-
-    ## Path for grafana ingress
+      - poster-downloader.ddns.net
     path: /grafana
 
-    ## TLS configuration for grafana Ingress
-    ## Secret must be manually created in the namespace
-    ##
     tls: 
       - hosts:
         - poster-downloader.ddns.net
