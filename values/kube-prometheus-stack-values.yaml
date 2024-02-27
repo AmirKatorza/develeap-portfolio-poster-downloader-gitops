@@ -17,22 +17,18 @@ grafana:
   ingress:
     ## If true, Grafana Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## IngressClassName for Grafana Ingress.
     ## Should be provided if Ingress is enable.
     ##
-    ingressClassName: nginx
+    ingressClassName: nginx         
 
-    ## Annotations for Grafana Ingress
+    ## Hostnames.
+    ## Must be provided if Ingress is enable.
     ##
-    # annotations: 
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: "true"
-    #   cert-manager.io/cluster-issuer: "letsencrypt"   
-
     hosts:
-      - poster-downloader.ddns.net
+      - poster-downloader.ddns.net    
 
     ## Path for grafana ingress
     path: /grafana
@@ -43,7 +39,6 @@ grafana:
     tls: 
       - hosts:
         - poster-downloader.ddns.net
-        secretName: source-tls        
 
   # # To make Grafana persistent (Using Statefulset)
   # #

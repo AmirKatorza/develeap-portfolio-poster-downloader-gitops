@@ -8,7 +8,7 @@ spec:
   secretName: source-tls
   # What Issuer to use for getting the certificate.
   issuerRef:
-    name: letsencrypt-nginx
+    name: letsencrypt
     kind: Issuer
     group: cert-manager.io
   # Common name to be used on the Certificate.

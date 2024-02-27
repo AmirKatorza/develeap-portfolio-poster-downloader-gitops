@@ -24,7 +24,7 @@ kibana:
     tls:
       - hosts:
           - poster-downloader.ddns.net
-        secretName: source-tls          
+        # secretName: source-tls          
 
 # Fluent-bit values
 fluent-bit:

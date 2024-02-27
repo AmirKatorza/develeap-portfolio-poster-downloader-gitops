@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: letsencrypt-nginx
+  name: letsencrypt
   namespace: cert-manager
 spec:
   acme:
@@ -16,7 +16,7 @@ spec:
     email: amir.katorza@gmail.com
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: letsencrypt-nginx-private-key
+      name: letsencrypt-private-key
     # Enable the HTTP-01 challenge provider
     solvers:
       - http01:
