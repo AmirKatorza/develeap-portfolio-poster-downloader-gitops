@@ -4,7 +4,7 @@ app:
   replicaCount: 1
   image:
     repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
-    tag: "2.1.6"
+    tag: "2.1.7"
   port: 5000
   resources:
     requests:
@@ -13,10 +13,8 @@ app:
     limits:
       cpu: 500m
       memory: 512Mi
-
 service:
   port: 80
-
 ingress:
   enabled: true # Set to false if you don't want to use Ingress  
   ingressControllerNamespace: ingress
@@ -25,12 +23,10 @@ ingress:
   tls:
     enabled: true # Enable TLS for HTTPS
     # staging: true # Use Let's Encrypt production environment
-    secretName: source-tls     
-
+    secretName: source-tls
 configmap:
   data:
     LOG_LEVEL: "INFO"
-
 mongodb:
   architecture: replicaset
   replicaCount: 3
