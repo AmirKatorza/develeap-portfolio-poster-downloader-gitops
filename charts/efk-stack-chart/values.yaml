@@ -28,34 +28,41 @@ kibana:
 
 # Fluent-bit values
 fluent-bit:
+  flush: 1
+  metricsPort: 2020 
+  logLevel: info
+  
+  ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/configuration-file
   config:
     service: |
       [SERVICE]
           Daemon Off
-          Flush {{ .Values.flush }}
-          Log_Level {{ .Values.logLevel }}
+          Flush {{ .Values.fluent-bit.flush }}
+          Log_Level {{ .Values.fluent-bit.logLevel }}
           Parsers_File /fluent-bit/etc/parsers.conf
           Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
           HTTP_Server On
           HTTP_Listen 0.0.0.0
-          HTTP_Port {{ .Values.metricsPort }}
+          HTTP_Port {{ .Values.fluent-bit.metricsPort }}
           Health_Check On
-    
+
+    ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
       [INPUT]
           Name tail
           Path /var/log/containers/*poster*.log
           multiline.parser docker, cri
           Tag kube.*
-          Mem_Buf_Limit 100MB
+          Mem_Buf_Limit 5MB
           Skip_Long_Lines On
-      
+
       [INPUT]
           Name systemd
           Tag host.*
           Systemd_Filter _SYSTEMD_UNIT=kubelet.service
           Read_From_Tail On
-    
+
+    ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |
       [FILTER]
           Name kubernetes
@@ -64,30 +71,21 @@ fluent-bit:
           Keep_Log Off
           K8S-Logging.Parser On
           K8S-Logging.Exclude On
-    
+
+    ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
       [OUTPUT]
           Name es
           Match kube.*
-          Type  _doc
           Host elasticsearch-master
-          Port 9200
-          tls Off
-          tls.verify Off
           Logstash_Format On
-          Logstash_Prefix poster-downloader
+          Logstash_Prefix poster
           Retry_Limit False
-          Suppress_Type_Name On
 
       [OUTPUT]
           Name es
           Match host.*
-          Type  _doc
           Host elasticsearch-master
-          Port 9200
-          tls Off
-          tls.verify Off
           Logstash_Format On
           Logstash_Prefix node
           Retry_Limit False
-          Suppress_Type_Name On
