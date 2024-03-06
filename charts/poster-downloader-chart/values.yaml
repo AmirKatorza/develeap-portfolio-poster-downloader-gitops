@@ -4,7 +4,7 @@ app:
   replicaCount: 1
   image:
     repository: 644435390668.dkr.ecr.us-east-1.amazonaws.com/amirk-poster-downloader
-    tag: "2.1.9"
+    tag: "2.1.12"
   port: 5000
   resources:
     requests:
