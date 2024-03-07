@@ -1,4 +1,4 @@
-ClusterIssuer:
+Issuer:
   staging: true  
 
 cert-manager:

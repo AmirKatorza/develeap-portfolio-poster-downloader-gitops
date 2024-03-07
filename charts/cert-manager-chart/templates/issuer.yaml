@@ -5,7 +5,7 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-{{ if .Values.ClusterIssuer.staging }}
+{{ if .Values.Issuer.staging }}
     # The ACME server URL (staging)
     server: https://acme-staging-v02.api.letsencrypt.org/directory
 {{ else }}
