@@ -51,7 +51,7 @@ fluent-bit:
       [INPUT]
           Name tail
           Path /var/log/containers/*poster*.log
-          Parser json_parser
+          multiline.parser docker, cri
           Tag kube.*
           Mem_Buf_Limit 5MB
           Skip_Long_Lines On
@@ -90,12 +90,12 @@ fluent-bit:
           Logstash_Prefix node
           Retry_Limit False
 
-    customParsers: |
-      [PARSER]
-          Name json_parser
-          Format regex
-          Regex ^[^\s]+\s+[^\s]+\s+[^\s]+\s+(?<json>{.*})
-          Time_Key asctime
-          Time_Format %Y-%m-%d %H:%M:%S,%L
-          Time_Keep On
-          Decode_Field_As json json
+    # customParsers: |
+    #   [PARSER]
+    #       Name json_parser
+    #       Format regex
+    #       Regex ^[^\s]+\s+[^\s]+\s+[^\s]+\s+(?<json>{.*})
+    #       Time_Key asctime
+    #       Time_Format %Y-%m-%d %H:%M:%S,%L
+    #       Time_Keep On
+    #       Decode_Field_As json json
