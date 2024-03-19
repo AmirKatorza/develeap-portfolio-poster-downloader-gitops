@@ -43,7 +43,7 @@ fluent-bit:
           Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
           HTTP_Server On
           HTTP_Listen 0.0.0.0
-          HTTP_Port {{ .Values.fluent-bit.metricsPort }}
+          HTTP_Port {{ .Values.metricsPort }}
           Health_Check On
 
     ## https://docs.fluentbit.io/manual/pipeline/inputs
