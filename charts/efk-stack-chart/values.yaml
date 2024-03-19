@@ -28,8 +28,8 @@ kibana:
 
 # Fluent-bit values
 fluent-bit:
-  flush: 1
-  metricsPort: 2020 
+  # flush: 1
+  # metricsPort: 2020 
   logLevel: info
   
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/configuration-file
